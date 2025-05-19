@@ -1,0 +1,30 @@
+// PRIMERO SE DEBE CREAR LAS ENTIDADES DEBILES USUARIOS Y FORMATO, PARA LUEGO CONTINUAR CON EL ARCHIVO QUE DEPENDE DE UNA ID DE FORMATO Y 
+CONVERSIONES DEPENDE DE ID FORMATOS TAMBIEN E ID USUARIO.
+QUERY EN JSON PARA PROBAR EN POSTMAN
+//USUARIOS
+{
+  "correoElectronico": "ejemplo@email.com",
+  "nombreUsuario": "usuario123",
+  "clave": "secreto123"
+}
+
+// FORMATO
+{
+  "nombreFormato": "PDF",
+  "extensionFormato": ".pdf"
+}
+
+// ARCHIVO
+{
+  "nombreArchivo": "Prueba",
+  "formato": {
+    "id": 1
+  }
+}
+
+//CONVERSIONES
+{
+  "usuario": { "id": },
+  "formatoOrigen": { "id":  },
+  "formatoConvertido": { "id":  }
+}
