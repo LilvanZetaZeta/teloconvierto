@@ -28,9 +28,13 @@ public class FormatoServicioTest {
     @MockBean
     private FormatoRepositorio formatoRepositorio;
 
+    private Formato crearFormato() {
+        return new Formato(1, "prueba", ".pdf");
+    }
+
     @Test
     public void testListar() {
-        when(formatoRepositorio.findAll()).thenReturn(List.of(new Formato(1, "prueba", "pdf")));
+        when(formatoRepositorio.findAll()).thenReturn(List.of(crearFormato()));
         List<Formato> formatos = formatoServicio.listar();
         assertNotNull(formatos);
         assertEquals(1, formatos.size());
@@ -38,7 +42,7 @@ public class FormatoServicioTest {
 
      @Test
     public void testListarPorId() {
-        Formato formato = new Formato(1, "prueba", ".pdf");
+        Formato formato = crearFormato();
         when(formatoRepositorio.findById(1)).thenReturn(java.util.Optional.of(formato));
         Formato foundformato = formatoServicio.obtenerPorId(1).orElse(null);
         assertNotNull(foundformato);
@@ -48,7 +52,7 @@ public class FormatoServicioTest {
 
     @Test 
     public void testGuardar() {
-        Formato formato = new Formato(1, "prueba", ".pdf");
+        Formato formato = crearFormato();
         when(formatoRepositorio.save(formato)).thenReturn(formato);
         Formato savedFormato = formatoServicio.guardar(formato);
         assertNotNull(savedFormato);
@@ -57,7 +61,7 @@ public class FormatoServicioTest {
 
     @Test
     public void testPatcActualizar() {
-        Formato existing = new Formato(1, "prueba", ".pdf");
+        Formato existing = crearFormato();
         Formato patchData = new Formato();
         patchData.setNombreFormato("pedro");;
 
@@ -82,7 +86,7 @@ public class FormatoServicioTest {
     @Test
     public void testBuscarPorNombre() {
         String nombre = "prueba";
-        List<Formato> formatosMock = List.of(new Formato(1, "prueba", ".pdf"));
+        List<Formato> formatosMock = List.of(crearFormato());
         when(formatoRepositorio.buscarPorNombre(nombre)).thenReturn(formatosMock);
         List<Formato> formatos = formatoServicio.buscarPorNombre(nombre);
         assertNotNull(formatos);
@@ -93,7 +97,7 @@ public class FormatoServicioTest {
     @Test
     public void testBuscarPorExtension() {
         String extension = ".pdf";
-        List<Formato> formatosMock = List.of(new Formato(1, "prueba", ".pdf"));
+        List<Formato> formatosMock = List.of(crearFormato());
         when(formatoRepositorio.buscarPorExtension(extension)).thenReturn(formatosMock);
         List<Formato> Formatos = formatoServicio.buscarPorExtension(extension);
         assertNotNull(Formatos);

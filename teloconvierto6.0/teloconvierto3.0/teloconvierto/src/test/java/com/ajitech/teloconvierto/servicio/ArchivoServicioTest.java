@@ -30,9 +30,13 @@ public class ArchivoServicioTest {
     private ArchivoRepositorio archivoRepositorio;
 
 
+    private Archivo crearArchivo() {
+        return new Archivo(1, "prueba", new Formato());
+    }
+
     @Test
     public void testListar() {
-        when(archivoRepositorio.findAll()).thenReturn(List.of(new Archivo(1, "prueba", new Formato())));
+        when(archivoRepositorio.findAll()).thenReturn(List.of(crearArchivo()));
         List<Archivo> archivos = archivoServicio.listar();
         assertNotNull(archivos);
         assertEquals(1, archivos.size());
@@ -40,7 +44,7 @@ public class ArchivoServicioTest {
 
     @Test
     public void testListarPorId() {
-        Archivo archivo = new Archivo(1, "prueba", new Formato());
+        Archivo archivo = crearArchivo();
         when(archivoRepositorio.findById(1)).thenReturn(java.util.Optional.of(archivo));
         Archivo foundarchivo = archivoServicio.obtenerPorId(1).orElse(null); // revisar
         assertNotNull(foundarchivo);
@@ -49,7 +53,7 @@ public class ArchivoServicioTest {
 
      @Test 
     public void testGuardar() {
-        Archivo archivo = new Archivo(1, "prueba", new Formato());
+        Archivo archivo = crearArchivo();
         when(archivoRepositorio.save(archivo)).thenReturn(archivo);
         Archivo savedarchivo = archivoServicio.guardar(archivo);
         assertNotNull(savedarchivo);
@@ -58,7 +62,7 @@ public class ArchivoServicioTest {
 
     @Test
     public void testActualizar() {
-        Archivo archivo = new Archivo(1, "prueba", new Formato());
+        Archivo archivo = crearArchivo();
         Archivo patchData = new Archivo();
         when(archivoRepositorio.save(archivo)).thenReturn(archivo);
         patchData.setNombreArchivo("prueba actualizada");
@@ -84,7 +88,7 @@ public class ArchivoServicioTest {
     @Test
     public void testBuscarPorNombre() {
         String nombre = "archivo";
-        List<Archivo> archivosMock = List.of(new Archivo(1, "prueba", new Formato()));
+        List<Archivo> archivosMock = List.of(crearArchivo());
         when(archivoRepositorio.buscarPorNombre(nombre)).thenReturn(archivosMock);
         List<Archivo> archivos = archivoServicio.buscarPorNombre(nombre);
 
@@ -97,7 +101,7 @@ public class ArchivoServicioTest {
     @Test
     public void testBuscarPorFormato() {
         Formato formato = new Formato();
-        List<Archivo> archivosMock = List.of(new Archivo(1, "prueba", formato));
+        List<Archivo> archivosMock = List.of(crearArchivo());
         when(archivoRepositorio.buscarPorFormato(formato.getId())).thenReturn(archivosMock);
         List<Archivo> archivos = archivoServicio.buscarPorFormato(formato.getId());
 

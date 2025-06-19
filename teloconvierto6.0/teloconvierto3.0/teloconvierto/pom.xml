@@ -4,6 +4,7 @@
                              https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Hereda configuración de Spring Boot -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -11,104 +12,103 @@
         <relativePath/>
     </parent>
 
+    <!-- Información general del proyecto -->
     <groupId>com.ajitech</groupId>
     <artifactId>teloconvierto</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>teloconvierto</name>
     <description>Proyecto teloconvierto</description>
 
+    <!-- Propiedades globales -->
     <properties>
         <java.version>17</java.version>
     </properties>
 
     <dependencies>
-        <!-- Spring Boot Web -->
+        <!-- ================== SPRING BOOT ================== -->
+        <!-- API REST -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <!-- Spring Boot JPA -->
+        <!-- JPA para ORM -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <!-- HATEOAS para hipermedios -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
 
-        <!-- MySQL Driver -->
+        <!-- ================== BASE DE DATOS ================== -->
+        <!-- Driver MySQL -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Lombok -->
+        <!-- ================== UTILIDADES ================== -->
+        <!-- Lombok para reducir boilerplate -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <!-- Apache POI para archivos Word/Excel -->
+        <!-- DataFaker para datos aleatorios -->
+        <dependency>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <!-- Apache POI para Word/Excel -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.3</version>
         </dependency>
-
-        <!-- OpenPDF para generación de PDF -->
+        <!-- OpenPDF para PDF -->
         <dependency>
             <groupId>com.github.librepdf</groupId>
             <artifactId>openpdf</artifactId>
             <version>1.3.26</version>
         </dependency>
-
-        <!-- OpenCSV para CSV (si usas) -->
+        <!-- OpenCSV para CSV -->
         <dependency>
             <groupId>com.opencsv</groupId>
             <artifactId>opencsv</artifactId>
             <version>5.7.1</version>
         </dependency>
 
-        <!-- Dependencias para testing -->
+        <!-- ================== DOCUMENTACIÓN ================== -->
+        <!-- SpringDoc OpenAPI/Swagger -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <!-- ================== TESTING ================== -->
+        <!-- Spring Boot Test (JUnit, AssertJ, etc) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!-- mockito-->
+        <!-- Mockito para mocks -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!-- JUnit-->
+        <!-- JUnit Jupiter Engine -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!-- DataFaker para generación de datos falsos --> 
-        <dependency>
-            <groupId>net.datafaker</groupId>
-            <artifactId>datafaker</artifactId>
-            <version>2.4.2</version>
-        </dependency>
-
-        <!-- SpringDoc OpenAPI para documentación de la API -->
-        <dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.6.0</version>
-		</dependency>
-
-        <!-- Spring Boot HATEOAS para hipermedios -->
-        <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-hateoas</artifactId>
-		</dependency>
     </dependencies>
 
     <build>
@@ -129,7 +129,6 @@
                     <release>${java.version}</release>
                 </configuration>
             </plugin>
-
             <!-- Plugin para empaquetar Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
